@@ -7,11 +7,11 @@
 <body>
 
     <nav>
-        <a href="/">Home page</a>
-        <a href="/about">About page</a>
-        <a href="/contact">Contact page</a>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
     </nav>
 
-    <h1>Hello from home page</h1>
+    <?php echo $slot ?>
 </body>
 </html>
