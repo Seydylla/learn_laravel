@@ -6,6 +6,8 @@ use App\Models\Employer;
 use App\Models\Job;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+//  It is for generating fake but example datas for database.
+
 /**
  * @extends Factory<Job>
  */
