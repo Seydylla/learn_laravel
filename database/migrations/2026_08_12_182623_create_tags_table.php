@@ -16,16 +16,20 @@ return new class extends Migration
         });
 
         Schema::create('job_tag', function (Blueprint $table) {
+
+        //  Making and middle table and when you click delete on of them, it deletes both of them in the middle.
+
             $table->id();
-            $table->foreignIdFor(\App\Models\Job::class, 'job_listing_id');
-            $table->foreignIdFor(\App\Models\Tag::class);
+            $table->foreignIdFor(\App\Models\Job::class, 'job_listing_id')->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(\App\Models\Tag::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
 
-    
+
     public function down(): void
     {
         Schema::dropIfExists('tags');
+        Schema::dropIfExists('job_tag');
     }
 };
