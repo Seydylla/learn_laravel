@@ -11,6 +11,8 @@ Route::get('/', function () {
 
 Route::get('/jobs', function (){
 
+    //  This reduces query times and just use one time query
+
     $job = Job::with('employer')->get();
     return view('jobs', [
         'jobs' => $job
