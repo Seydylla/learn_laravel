@@ -13,7 +13,7 @@ Route::get('/jobs', function (){
 
     //  This reduces query times and just use one time query
 
-    $job = Job::with('employer')->get();
+    $job = Job::with('employer')->paginate(3);
     return view('jobs', [
         'jobs' => $job
     ]);
