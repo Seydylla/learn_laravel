@@ -15,20 +15,20 @@ Route::get('/jobs', function (){
 
     $job = Job::with('employer')->simplePaginate(3);
     // $job = Job::with('employer')->cursorPaginate(3); //  This is datas which we don't need to show the number of page link
-    return view('jobs/index', [
+    return view('jobs.index', [
         'jobs' => $job
     ]);
 });
 
 Route::get('/jobs/create', function () {
-    return view('jobs/create');
+    return view('jobs.create');
 });
 
 Route::get('/jobs/{id}', function ($id){
 
     $job = Job::find($id);
 
-    return view('jobs/show', ['job' => $job]);
+    return view('jobs.show', ['job' => $job]);
 });
 
 //  If put here(under of the parent conn, it will be give an error. We will have to put above of that)
