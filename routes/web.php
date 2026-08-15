@@ -13,7 +13,7 @@ Route::get('/jobs', function (){
 
     //  This reduces query times and just use one time query
 
-    $job = Job::with('employer')->simplePaginate(3);
+    $job = Job::with('employer')->latest()->simplePaginate(3);
     // $job = Job::with('employer')->cursorPaginate(3); //  This is datas which we don't need to show the number of page link
     return view('jobs.index', [
         'jobs' => $job
@@ -32,7 +32,13 @@ Route::get('/jobs/{id}', function ($id){
 });
 
 Route::post('/jobs', function () {
-    dd('Good evening');
+    Job::create([
+        'title' => request('title'),
+        'salary' => request('salary'),
+        'employer_id' => 1
+    ]);
+
+    return redirect('/jobs');
 });
 
 //  If put here(under of the parent conn, it will be give an error. We will have to put above of that)
