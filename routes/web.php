@@ -31,6 +31,10 @@ Route::get('/jobs/{id}', function ($id){
     return view('jobs.show', ['job' => $job]);
 });
 
+Route::post('/jobs', function () {
+    dd('Good evening');
+});
+
 //  If put here(under of the parent conn, it will be give an error. We will have to put above of that)
 // Route::get('/jobs/create', function () {
 //     return view('...');
