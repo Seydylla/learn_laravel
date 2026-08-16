@@ -50,6 +50,13 @@ Route::post('/jobs', function () {
     return redirect('/jobs');
 });
 
+Route::get('/jobs/{id}/edit', function ($id){
+
+    $job = Job::find($id);
+
+    return view('jobs.edit', ['job' => $job]);
+});
+
 //  If put here(under of the parent conn, it will be give an error. We will have to put above of that)
 // Route::get('/jobs/create', function () {
 //     return view('...');
