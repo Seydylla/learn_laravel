@@ -6,6 +6,7 @@
 
     <form method="POST" action="/jobs/{{$job->id}}">
         @csrf
+        @method('PATCH')
         <div class="space-y-12">
             <div class="border-b border-gray-900/10 pb-12 dark:border-white/10">
 
@@ -40,10 +41,23 @@
             </div>
         </div>
 
-        <div class="mt-6 flex items-center justify-end gap-x-6">
-            <x-button href='/jobs/{{$job->id}}' class="text-sm/6 font-semibold text-gray-900 dark:text-white">Cancel</x-button>
-            <x-button href='/jobs/{{$job->id}}' class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:shadow-none dark:focus-visible:outline-indigo-500">Update</x-button>
+        <div class="mt-6 flex items-center justify-between gap-x-6">
+            <div class="flex items-center">
+                <button class="text-red-500 text-sm font-bold" form="delete-form">Delete</button>
+            </div>
+
+            <div class="flex items-center gap-x-6">
+                <x-button href='/jobs/{{$job->id}}' class="text-sm/6 font-semibold text-gray-900 dark:text-white">Cancel</x-button>
+                <div>
+                    <button class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:shadow-none dark:focus-visible:outline-indigo-500">Update</button>
+                </div>
+            </div>
         </div>
+    </form>
+
+    <form method="POST" action="/jobs/{{$job->id}}" id="delete-form" class="hidden">
+        @csrf
+        @method('DELETE')
     </form>
 
 </x-layout>
