@@ -57,6 +57,32 @@ Route::get('/jobs/{id}/edit', function ($id){
     return view('jobs.edit', ['job' => $job]);
 });
 
+Route::patch('/jobs/{id}', function ($id){
+    //  validate
+
+    request()->validate([
+        'title' => ['required', 'min:3'],
+        'salary' => ['required']
+    ]);
+    //  authorize (on hold ...)
+
+    $job = Job::findOrFail($id);
+
+    $job->update([
+        'title' => request('title'),
+        'salary' => request('salary')
+    ]);
+
+    return redirect('/jobs/' . $job->id);
+});
+
+Route::delete('/jobs/{id}', function ($id){
+
+    Job::findOrFail($id)->delete();
+
+    return redirect('/jobs');
+});
+
 //  If put here(under of the parent conn, it will be give an error. We will have to put above of that)
 // Route::get('/jobs/create', function () {
 //     return view('...');
