@@ -15,55 +15,15 @@ Route::get('/jobs', [JobController::class, 'index']);
 
 Route::get('/jobs/create', [JobController::class, 'create']);
 
+Route::post('/jobs', [JobController::class, 'store']);
+
 Route::get('/jobs/{job}', [JobController::class, 'show']);
 
-Route::post('/jobs', function () {
+Route::get('/jobs/{job}/edit', [JobController::class, 'edit']);
 
-    //  Validate
+Route::patch('/jobs/{job}', [JobController::class, 'update']);
 
-    request()->validate([
-        'title' => ['required', 'min:3'],
-        'salary' => ['required']
-    ]);
-
-
-    Job::create([
-        'title' => request('title'),
-        'salary' => request('salary'),
-        'employer_id' => 1
-    ]);
-
-    return redirect('/jobs');
-});
-
-Route::get('/jobs/{job}/edit', function ( Job $job){
-
-    return view('jobs.edit', ['job' => $job]);
-});
-
-Route::patch('/jobs/{job}', function (Job $job){
-    //  validate
-
-    request()->validate([
-        'title' => ['required', 'min:3'],
-        'salary' => ['required']
-    ]);
-    //  authorize (on hold ...)
-
-    $job->update([
-        'title' => request('title'),
-        'salary' => request('salary')
-    ]);
-
-    return redirect('/jobs/' . $job->id);
-});
-
-Route::delete('/jobs/{job}', function (Job $job){
-
-    $job->delete();
-
-    return redirect('/jobs');
-});
+Route::delete('/jobs/{job}', [JobController::class, 'destroy']);
 
 //  If put here(under of the parent conn, it will be give an error. We will have to put above of that)
 // Route::get('/jobs/create', function () {
