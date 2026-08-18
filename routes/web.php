@@ -2,6 +2,8 @@
 
 use App\Models\Job;
 
+use App\Http\Controllers;
+use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Arr;
 
@@ -9,27 +11,11 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/jobs', function (){
+Route::get('/jobs', [JobController::class, 'index']);
 
-    //  This reduces query times and just use one time query
+Route::get('/jobs/create', [JobController::class, 'create']);
 
-    $job = Job::with('employer')->latest()->simplePaginate(3);
-    // $job = Job::with('employer')->cursorPaginate(3); //  This is datas which we don't need to show the number of page link
-    return view('jobs.index', [
-        'jobs' => $job
-    ]);
-});
-
-Route::get('/jobs/create', function () {
-    return view('jobs.create');
-});
-
-Route::get('/jobs/{id}', function ($id){
-
-    $job = Job::find($id);
-
-    return view('jobs.show', ['job' => $job]);
-});
+Route::get('/jobs/{job}', [JobController::class, 'show']);
 
 Route::post('/jobs', function () {
 
@@ -50,14 +36,12 @@ Route::post('/jobs', function () {
     return redirect('/jobs');
 });
 
-Route::get('/jobs/{id}/edit', function ($id){
-
-    $job = Job::find($id);
+Route::get('/jobs/{job}/edit', function ( Job $job){
 
     return view('jobs.edit', ['job' => $job]);
 });
 
-Route::patch('/jobs/{id}', function ($id){
+Route::patch('/jobs/{job}', function (Job $job){
     //  validate
 
     request()->validate([
@@ -65,8 +49,6 @@ Route::patch('/jobs/{id}', function ($id){
         'salary' => ['required']
     ]);
     //  authorize (on hold ...)
-
-    $job = Job::findOrFail($id);
 
     $job->update([
         'title' => request('title'),
@@ -76,9 +58,9 @@ Route::patch('/jobs/{id}', function ($id){
     return redirect('/jobs/' . $job->id);
 });
 
-Route::delete('/jobs/{id}', function ($id){
+Route::delete('/jobs/{job}', function (Job $job){
 
-    Job::findOrFail($id)->delete();
+    $job->delete();
 
     return redirect('/jobs');
 });
