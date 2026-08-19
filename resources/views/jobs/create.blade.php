@@ -12,23 +12,23 @@
             <p class="mt-1 text-sm/6 text-gray-600 dark:text-gray-400">We just need usefull details from you.</p>
 
                 <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                    <div class="sm:col-span-4">
+                    <x-form-field>
                         <x-form-label for="title">Title</x-form-label>
                             <div class="mt-2">
-                                <x-form-input id="title" name="title" placeholder="Project manager"/>
+                                <x-form-input id="title" name="title" placeholder="Project manager" required/>
 
                                 <x-form-error name="title" />
                             </div>
-                        </div>
+                    </x-form-field>
 
-                    <div class="sm:col-span-4">
+                    <x-form-field>
                         <label for="salary" class="block text-sm/6 font-medium text-gray-900 dark:text-white">Salary</label>
                         <div class="mt-2">
-                            <x-form-input id="salary" name="salary" placeholder="$50,000 USD"/>
+                            <x-form-input id="salary" name="salary" placeholder="$50,000 USD" required/>
 
                             <x-form-error name="salary" />
                         </div>
-                    </div>
+                    </x-form-field>
                 </div>
 
             </div>
