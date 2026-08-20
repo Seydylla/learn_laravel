@@ -16,6 +16,12 @@ class SessionController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required']
         ]);
+
+        Auth::attempt($attributes);
+
+        request()->session()->regenerate();
+
+        return redirect('/jobs');
     }
 
     public function destroy() {
