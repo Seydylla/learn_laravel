@@ -12,7 +12,10 @@ class SessionController extends Controller
     }
 
     public function store() {
-        dd('good morning');
+        $attributes = request()->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required']
+        ]);
     }
 
     public function destroy() {
