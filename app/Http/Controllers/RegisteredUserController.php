@@ -17,7 +17,7 @@ class RegisteredUserController extends Controller
 
     //  validate
         $sttributes = request()->validate([
-            'fist_name' => ['required'],
+            'first_name' => ['required'],
             'last_name' => ['required'],
             'email' => ['required', 'email'],
             'password' => ['required', Password::min(6), 'confirmed'],
@@ -30,5 +30,9 @@ class RegisteredUserController extends Controller
         //Log in
 
         Auth::login($user);
+
+        //  redirect
+
+        return redirect('/jobs');
     }
 }
