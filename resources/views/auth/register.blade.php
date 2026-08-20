@@ -44,6 +44,15 @@
                                 <x-form-error name="password" />
                             </div>
                     </x-form-field>
+
+                    <x-form-field>
+                        <x-form-label for="password_confirmation">Password confirmation</x-form-label>
+                            <div class="mt-2">
+                                <x-form-input id="password_confirmation" name="password_confirmation" placeholder="Project manager"/>
+
+                                <x-form-error name="password_confirmation" />
+                            </div>
+                    </x-form-field>
                 </div>
 
             </div>
