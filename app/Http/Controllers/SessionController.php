@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +18,11 @@ class SessionController extends Controller
             'password' => ['required']
         ]);
 
-        Auth::attempt($attributes);
+        if(! Auth::attempt($attributes)) {
+            throw ValidationException::withMessages([
+                'email' => 'Given informations are incorrect'
+            ]);
+        }
 
         request()->session()->regenerate();
 
